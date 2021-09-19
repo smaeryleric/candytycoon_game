@@ -1,2 +1,2 @@
-# candytycoon_game
-A fun open-source game, made with unity. 
+# Candy Tycoon
+A fun open-source game, made with unity.
