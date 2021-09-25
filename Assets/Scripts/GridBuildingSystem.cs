@@ -9,11 +9,6 @@ public class GridBuildingSystem : MonoBehaviour
     private void Start()
     {
         grid = GetComponent<Grid>();
-        Building newBuilding = new TownHall();
-    }
-
-    public void GetBuildingPosition(Building building)
-    {
-        
+        Building newBuilding = new TownHall(new Vector2Int(0, 0));
     }
 }

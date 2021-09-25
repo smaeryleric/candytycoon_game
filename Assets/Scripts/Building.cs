@@ -16,13 +16,14 @@ public abstract class Building : MonoBehaviour
     #endregion
 
     #region World Controls
-    private Vector2Int gridPosition;
+    public Vector2Int GridPosition { get; private set; }
     #endregion
 
     private void Start() => StartProduction();
 
-    public Building(Vector2Int gridPosition)
+    public Building(Vector2Int _gridPosition)
     {
-        this.gridPosition = gridPosition;
+        GridPosition = _gridPosition;
+        Debug.Log("Generated");
     }
 }
