@@ -34,7 +34,7 @@ public class CameraPanZoom : MonoBehaviour
     }
     private void Zoom(float increment)
     {
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, 3, 7);
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, 3, 12);
     }
     private void Update()
     {
