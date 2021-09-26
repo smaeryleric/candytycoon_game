@@ -12,30 +12,43 @@ public class GridBuildingSystem : MonoBehaviour
     [SerializeField] private Tilemap mainTilemap;
     [SerializeField] private Tile occupiedTile;
     [SerializeField] private GameObject buildingPrefab;
-    
-    private void Awake()
+
+    private Building _selectedBuilding;
+    public Building SelectedBuilding
     {
-        Instance = this;
+        get
+        {
+            return _selectedBuilding;
+        }
+        set
+        {
+            _selectedBuilding = value;
+        }
     }
+    
+    private void Awake() =>
+        Instance = this;
     private void Start()
     {
-        Spawn();
+        Spawn(new Vector3Int(0,0,0));
+        Spawn(new Vector3Int(5,4,0));
+        Spawn(new Vector3Int(3,-5,0));
     }
-
-    public Vector2Int GetCellPosition(Vector2 worldPosition)
+    public Vector3Int GetCellPosition(Vector3 worldPosition)
     {
-        return (Vector2Int)grid.WorldToCell(worldPosition);
+        return grid.WorldToCell(worldPosition);
     }
-    private void Spawn()
+    private void Spawn(Vector3Int cellPos)
     {
-        Vector2Int cellPos = new Vector2Int(3, 4);
-        Vector2 worldPos = grid.CellToWorld((Vector3Int)cellPos);
+        Vector3 worldPos = grid.GetCellCenterLocal(cellPos);
 
         Building building = Instantiate(buildingPrefab, worldPos, Quaternion.identity).GetComponent<Building>();
+        building.transform.position = grid.CellToWorld(building.GetCell());
 
         for (int i = 0; i < building.FilledCells.Length; i++)
         {
             mainTilemap.SetTile(building.FilledCells[i], occupiedTile);
         }
+        mainTilemap.SetTile(building.GetCell(), occupiedTile);
     }
 }

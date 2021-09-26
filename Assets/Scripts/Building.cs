@@ -18,7 +18,7 @@ public class Building : MonoBehaviour
     #endregion
     private void Start() => StartProduction();
 
-    public Vector2Int GetCell()
+    public Vector3Int GetCell()
     {
         return GridBuildingSystem.Instance.GetCellPosition(transform.position);
     }
